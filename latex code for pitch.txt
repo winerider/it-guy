@@ -497,6 +497,48 @@
   \end{center}
 \end{frame}
 
+% ---- 16b. Build vs Buy vs DIY ---------------------------------------
+\begin{frame}{The honest question: build, buy, or do it yourself?}
+  \vspace{0.1cm}
+  \begin{center}
+  \begin{tikzpicture}[node distance=0.5cm]
+    \node[cardwhite,minimum width=3.5cm,minimum height=2.9cm,text width=3.05cm] (diy)
+      {\textbf{\textcolor{teal}{DIY (free)}}\\[0.35em]\small Gmail labels \& filters.\\Shopify Flow for store tasks.\\[0.4em]\scriptsize\textcolor{muted}{Best for: the inbox cleanup.}};
+    \node[cardwhite,right=of diy,minimum width=3.5cm,minimum height=2.9cm,text width=3.05cm] (buy)
+      {\textbf{\textcolor{teal}{Buy (ready-made)}}\\[0.35em]\small Gorgias, Re:amaze, Richpanel.\\AI drafts + order lookup, supported.\\[0.4em]\scriptsize\textcolor{muted}{Best for: everyday email support.}};
+    \node[cardwhite,right=of buy,minimum width=3.5cm,minimum height=2.9cm,text width=3.05cm,draw=terra] (build)
+      {\textbf{\textcolor{terra}{Build (custom n8n)}}\\[0.35em]\small Only when tools fall short:\\custom glue, cost at scale, data control.\\[0.4em]\scriptsize\textcolor{muted}{Best for: the gaps, not the basics.}};
+  \end{tikzpicture}
+  \end{center}
+  \vspace{0.4cm}
+  \begin{block}{The honest take}
+    For most of this, the smart move is to buy or DIY --- not commission a custom black box. The value isn't building from scratch; it's choosing right and making it actually work for your shop.
+  \end{block}
+\end{frame}
+
+% ---- 16c. Where I add value -----------------------------------------
+\begin{frame}{Where I actually add value}
+  \vspace{0.1cm}
+  \begin{center}
+  \begin{tikzpicture}[node distance=0.5cm and 0.55cm]
+    \node[cardwhite,minimum width=2.4cm] (g) {Gmail};
+    \node[cardwhite,right=of g,minimum width=2.4cm] (s) {Shopify};
+    \node[cardwhite,right=of s,minimum width=2.4cm] (h) {Helpdesk\\\scriptsize(bought)};
+    \node[card,below=0.85cm of s,minimum width=5.6cm,minimum height=1.05cm,draw=terra,fill=softterra] (me) {\bfseries Me: choose $\rightarrow$ connect $\rightarrow$ safe rules};
+    \node[cardwhite,below=0.7cm of me,minimum width=5.6cm,draw=teal] (out) {Calmer inbox $\cdot$ faster replies $\cdot$ lower risk};
+    \draw[arrow] (g) -- (me); \draw[arrow] (s) -- (me); \draw[arrow] (h) -- (me);
+    \draw[arrow] (me) -- (out);
+  \end{tikzpicture}
+  \end{center}
+  \vspace{0.25cm}
+  \begin{itemize}\setlength\itemsep{0.38em}
+    \item \textbf{Pick \& configure} the right tool --- not sell you a black box.
+    \item \textbf{Write the SOPs} that make any tool safe (sizing, refunds, swaps).
+    \item \textbf{Build only the glue} the tools can't do --- nothing reinvented.
+    \item \textbf{No lock-in:} you own the tools, the data, and the rules.
+  \end{itemize}
+\end{frame}
+
 % ---- 17. Engagement --------------------------------------------------
 \begin{frame}{How I can keep helping}
   \vspace{0.2cm}
@@ -527,17 +569,17 @@
 \end{frame}
 
 % ---- 18. Final ask ---------------------------------------------------
-\begin{frame}{The ask}
-  \vspace{0.25cm}
-  \begin{block}{Approve the first safe step}
-    Let me roll out the Gmail label and filter system first, measure the before/after inbox noise, and use that win as the base for the next automation stage.
+\begin{frame}{The ask: a small, paid discovery + setup sprint}
+  \vspace{0.2cm}
+  \begin{block}{Two weeks, fixed scope, clear deliverables}
+    Start with the free inbox cleanup. Then I assess build-vs-buy for your support, set up the recommended tool, and write your first SOPs with you. You decide what comes next --- no open-ended commitment.
   \end{block}
   \vspace{0.45cm}
   \begin{center}
   \begin{tikzpicture}[node distance=0.55cm]
-    \node[cardwhite,minimum width=3.1cm,minimum height=1.35cm] (a) {\bfseries No new platform\\\small uses Gmail first};
-    \node[cardwhite,right=of a,minimum width=3.1cm,minimum height=1.35cm] (b) {\bfseries No customer risk\\\small no auto-send};
-    \node[cardwhite,right=of b,minimum width=3.1cm,minimum height=1.35cm] (c) {\bfseries Clear next step\\\small n8n roadmap};
+    \node[cardwhite,minimum width=3.1cm,minimum height=1.45cm] (a) {\bfseries Free quick win\\\small Gmail cleanup};
+    \node[cardwhite,right=of a,minimum width=3.1cm,minimum height=1.45cm] (b) {\bfseries Honest tool advice\\\small build vs buy};
+    \node[cardwhite,right=of b,minimum width=3.1cm,minimum height=1.45cm,draw=terra] (c) {\bfseries First SOPs\\\small written with you};
     \draw[arrow] (a) -- (b);
     \draw[arrow] (b) -- (c);
   \end{tikzpicture}
