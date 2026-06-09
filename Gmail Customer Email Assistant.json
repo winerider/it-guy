@@ -1,0 +1,1993 @@
+{
+  "name": "Gmail Customer Email Assistant",
+  "nodes": [
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.gmail_message_id }}",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              },
+              "rightValue": 0,
+              "id": "5ec7e312-ae4c-442f-a004-d6d8ac03349c"
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "d5d7de7a-de9f-4c22-906d-ba0bac83856a",
+      "name": "Stop If Already Processed",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.3,
+      "position": [
+        1136,
+        448
+      ]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "simple": false,
+        "maxResults": 1,
+        "filters": {
+          "q": "in:inbox -from:noreply -from:no-reply -from:mailer-daemon -label:\"AI Draft Created\" -label:\"Needs Custom Reply\" -label:\"No Reply Needed\"",
+          "readStatus": "unread"
+        },
+        "options": {}
+      },
+      "id": "dcbfdc60-00fd-4b2b-8d51-513e6b2975b2",
+      "name": "01 Gmail Trigger - New Test Email",
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        240,
+        448
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "zaanBlHB3o3kr9nX",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ String($json.from?.email || $json.from?.address || $json.from?.value || $json.from?.text || $json.from || \"\").toLowerCase() }}",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              },
+              "rightValue": "noreply",
+              "id": "e435dabd-4bae-4177-8b2b-4dbb70b09197"
+            },
+            {
+              "leftValue": "={{ String($json.from?.email || $json.from?.address || $json.from?.value || $json.from?.text || $json.from || \"\").toLowerCase() }}",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              },
+              "rightValue": "no-reply",
+              "id": "481e8887-b3e9-425b-ac95-e7b87da11220"
+            },
+            {
+              "leftValue": "={{ String($json.from?.email || $json.from?.address || $json.from?.value || $json.from?.text || $json.from || \"\").toLowerCase() }}",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              },
+              "rightValue": "mailer-daemon",
+              "id": "b8d9a07c-1801-4b60-9b27-afcb41221d2f"
+            },
+            {
+              "leftValue": "={{ String($json.from?.email || $json.from?.address || $json.from?.value || $json.from?.text || $json.from || \"\").toLowerCase() }}",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              },
+              "rightValue": "postmaster",
+              "id": "75abb6ae-d9bd-4276-9fda-189cc2d1b339"
+            },
+            {
+              "leftValue": "={{ String($json.subject || \"\").toLowerCase() }}",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              },
+              "rightValue": "undeliverable",
+              "id": "89104e79-e5ff-444d-beab-4771805286bc"
+            },
+            {
+              "leftValue": "={{ String($json.subject || \"\").toLowerCase() }}",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              },
+              "rightValue": "delivery status notification",
+              "id": "b74dee54-2774-4f5d-b790-62703fe17e27"
+            },
+            {
+              "leftValue": "={{ String($json.subject || \"\").toLowerCase() }}",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              },
+              "rightValue": "out of office",
+              "id": "91163431-73a4-4225-bc4c-c2c089a99776"
+            },
+            {
+              "leftValue": "={{ String($json.subject || \"\").toLowerCase() }}",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              },
+              "rightValue": "automatic reply",
+              "id": "3a7cd006-2e08-4675-bc9f-1fa40bd32356"
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {
+          "ignoreCase": false
+        }
+      },
+      "id": "e50ef0d3-ce01-443e-b12d-142044cdfcc1",
+      "name": "02 Filter - Ignore Non Customer Emails",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.3,
+      "position": [
+        464,
+        448
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1C1uQHtipJ4pI5jCHGLsbUkyLRcyRTfcAwknPcWgt6CM",
+          "mode": "list",
+          "cachedResultName": "Email Automation",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1C1uQHtipJ4pI5jCHGLsbUkyLRcyRTfcAwknPcWgt6CM/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Logs",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1C1uQHtipJ4pI5jCHGLsbUkyLRcyRTfcAwknPcWgt6CM/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "gmail_message_id",
+              "lookupValue": "={{ $json.gmail_message_id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "653b1640-4098-4af0-b678-82070f88fd7d",
+      "name": "03 Dedupe - Check Message ID",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        912,
+        448
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "bVd8A9aGmEVEd5z7",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "gmail_message_id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "2",
+              "name": "gmail_thread_id",
+              "value": "={{ $json.threadId }}",
+              "type": "string"
+            },
+            {
+              "id": "3",
+              "name": "sender_email",
+              "value": "={{ $json.from.value[0].address }}",
+              "type": "string"
+            },
+            {
+              "id": "4",
+              "name": "sender_name",
+              "value": "={{ $json.from.value[0].name }}",
+              "type": "string"
+            },
+            {
+              "id": "5",
+              "name": "subject",
+              "value": "={{ $json.subject }}",
+              "type": "string"
+            },
+            {
+              "id": "6",
+              "name": "plain_text_body",
+              "value": "={{ $json.text || $json.textPlain || $json.snippet || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "7",
+              "name": "received_timestamp",
+              "value": "={{ $json.date }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "2789aee3-f4db-4928-a370-fb0cbfc3a6c2",
+      "name": "04 Prepare Email Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        688,
+        448
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.deepseek.com/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ ({\n  \"model\": \"deepseek-chat\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are an email classifier for Linen Connections customer support.\\nAnalyze the customer email and return ONLY valid JSON with these exact fields:\\n{\\n\\\"category\\\": \\\"sizing_question | sizing_exchange | size_confirmation | thanks_fyi | other\\\",\\n\\\"route\\\": \\\"draft | custom | no_reply\\\",\\n\\\"confidence\\\": 0.0,\\n\\\"priority\\\": \\\"P1 | P2 | P3\\\",\\n\\\"sentiment\\\": \\\"positive | neutral | frustrated | angry\\\",\\n\\\"reason\\\": \\\"short reason\\\"\\n}\\n\\nPILOT SCOPE:\\nThis is a sizing-only drafting pilot. Draft only safe, low-risk sizing information replies.\\n\\nDRAFTABLE:\\nSet route = \\\"draft\\\" only when:\\n- The email is a general pre-purchase sizing or fit question.\\n- The customer asks which size to choose.\\n- The customer asks about S/M, L/XL, AU sizing, fit, bust, length, or measurements.\\n- A plus-size or AU-size question is draftable if it is a general pre-purchase fit question and does not mention an existing order, delivery, return, exchange after delivery, refund, replacement, stock, or complaint.\\n- The answer can be safely drafted without checking Shopify, order status, stock, dispatch, returns, refunds, or replacements.\\n- confidence >= 0.7.\\n\\nCUSTOM:\\nSet route = \\\"custom\\\" if the email mentions or implies:\\n- an existing order\\n- order number\\n- changing a size after placing an order\\n- \\\"please make sure size X is sent\\\"\\n- dispatch\\n- shipping\\n- delivery\\n- \\\"already sent\\\"\\n- \\\"on the way\\\"\\n- wrong size received\\n- exchange after delivery\\n- return\\n- refund\\n- replacement\\n- complaint\\n- angry/frustrated tone\\n- damaged item\\n- missing parcel\\n- stock availability\\n- payment issue\\n- wholesale/bulk order\\n- unclear product or unclear context\\n- confidence < 0.7.\\n\\nNO REPLY:\\nSet route = \\\"no_reply\\\" only for simple thank-you, FYI, or confirmation emails that do not require a response.\\n\\nPRIORITY:\\n- P1 for angry customer, complaint, dispute, refund issue, payment issue, replacement issue, wrong address, missing parcel, or urgent order problem.\\n- P2 for safe sizing questions or ordinary custom review.\\n- P3 for thank-you/FYI/no-reply.\\n\\nRULES FOR 'REASON' FIELD:\\n- The reason must describe only the current email. Do not copy or reuse reasoning from previous examples.\\n\\nImportant:\\nNever assume stock, availability, dispatch timing, order status, refund status, or replacement approval.\\nOutput JSON only.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Subject: \" + $json.subject + \"\\n\\nBody: \" + $json.plain_text_body\n    }\n  ],\n  \"temperature\": 0.1,\n  \"response_format\": { \"type\": \"json_object\" }\n}) }}",
+        "options": {}
+      },
+      "id": "7163cc17-8d61-40d1-af36-fd49107b14e4",
+      "name": "05 Classifier - DeepSeek",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        2032,
+        448
+      ],
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "dJCBy7BobVidLuWL",
+          "name": "Bearer Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const classifierItems = $input.all();\nconst originalEmailItems = $items('Kill Switch - Pass Email Items');\n\nreturn classifierItems.map((item, index) => {\n  let content =\n    item.json.choices?.[0]?.message?.content ||\n    item.json.message?.content ||\n    item.json.content ||\n    item.json.text ||\n    '';\n\n  content = String(content).trim();\n\n  if (content.startsWith('```')) {\n    content = content\n      .replace(/^```json/i, '')\n      .replace(/^```/i, '')\n      .replace(/```$/i, '')\n      .trim();\n  }\n\n  let parsed;\n\n  try {\n    parsed = JSON.parse(content);\n  } catch (error) {\n    parsed = {\n      category: 'other',\n      route: 'custom',\n      confidence: 0,\n      priority: 'P2',\n      sentiment: 'neutral',\n      reason: 'Classifier JSON parse failed'\n    };\n  }\n\n  const original = originalEmailItems[index]?.json || {};\n\n  return {\n    json: {\n      ...original,\n      category: parsed.category || 'other',\n      route: parsed.route || 'custom',\n      confidence: parsed.confidence ?? 0,\n      priority: parsed.priority || 'P2',\n      sentiment: parsed.sentiment || 'neutral',\n      reason: parsed.reason || ''\n    }\n  };\n});"
+      },
+      "id": "0dd6f219-551a-406f-925f-7292806ac85f",
+      "name": "06 Parse Classifier JSON",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2256,
+        448
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.route }}",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "rightValue": "draft",
+                    "id": "779986a1-58bf-4c81-865b-17b61394bd1d"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.route }}",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "rightValue": "custom",
+                    "id": "537900e5-6eb7-430a-bc19-71be05f407d0"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.route }}",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "rightValue": "no_reply",
+                    "id": "21169a9d-d35f-4227-a911-664143a154c7"
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "7bc6d9a9-ac35-4ced-b822-fddd2756771d",
+      "name": "07 Switch - Route",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        2480,
+        432
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.deepseek.com/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ ({\n  \"model\": \"deepseek-chat\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a customer service email drafter for Linen Connections.\\nWrite ONLY the reply body and sign-off in Sweta's style.\\nOnly draft replies for safe pre-purchase sizing questions. If the email cannot be safely answered using the sizing guidance below, output exactly:\\nROUTE_TO_HUMAN\\n\\nSWETA STYLE:\\n- Open with \\\"Hi [customer],\\\" if the customer name is available, otherwise \\\"Hi,\\\".\\n- Use short, practical replies.\\n- Common first lines:\\n  \\\"Thanks for reaching out.\\\"\\n  \\\"Thanks for your email.\\\"\\n  \\\"Thanks for checking in.\\\"\\n- Use factual bridges:\\n  \\\"Please know that...\\\"\\n  \\\"Please note that...\\\"\\n- Keep paragraphs short.\\n- Use \\\"We hope this helps.\\\" or \\\"Hope this helps.\\\" for simple answers.\\n- End exactly with:\\nThanks,\\n[Type your name here]\\n\\nSAFE SIZING GUIDANCE:\\n- Kimonos, kaftans, and similar one-size garments: only state the size range if the product context clearly matches the known guidance.\\n- Known Sweta wording: one-size kimonos/kaftans/dresses may fit size 6 to size 14 AU.\\n- Known length wording: some kaftans/kimonos are 120cms long, but only mention this if the customer asks about length and the product context matches.\\n- Cotton pyjama sets: sized as S/M and L/XL.\\n- As a general guide, AU size 14 typically fits L/XL for cotton pyjama sets.\\n- S/M and L/XL are combined sizing ranges.\\n\\nPRODUCT-SPECIFIC MEASUREMENTS:\\n- Do not mention exact bust, chest, waist, hip, sleeve, inseam, or length measurements unless those measurements are supplied in the current email or verified reference data.\\n- Do not reuse \\\"40 inches\\\" as a general dress measurement.\\n\\nSWETA-STYLE EXAMPLES:\\nUse these examples for tone, structure, brevity, and wording pattern. Do not copy measurements or facts unless they match the current email.\\n\\nExample 1 — one-size fit range:\\nCustomer: Do you sell any plus size kimonos? Interested in a cotton kimono robe.\\nReply:\\nHi [customer],\\nThanks for reaching out.\\nPlease know that all our kimonos are one size and fits anyone from size 6 to size 14 (AU).\\nHope this helps.\\nThanks,\\n[Type your name here]\\n\\nExample 2 — kaftan length clarification:\\nCustomer: For the cotton kaftans, is 120cm the width or circumference?\\nReply:\\nHi,\\nThanks for your email.\\nPlease know that 120cms is the length of the kaftan and this one-size kaftan fits anyone from size 6 to size 14 (AU).\\nHope this helps.\\nThanks,\\n[Type your name here]\\n\\nExample 3 — pyjama size guide:\\nCustomer: I am an Australian size 14. What size cotton pyjamas should I choose?\\nReply:\\nHi [customer],\\nThanks for your email.\\nPlease know that our cotton pyjama sets are sized as S/M and L/XL. As a general guide, an AU size 14 would typically fit the L/XL size.\\nWe hope this helps.\\nThanks,\\n[Type your name here]\\n\\nExample 4 — product-specific measurement, only if verified:\\nCustomer: Do you have the measurements of this dress please?\\nReply:\\nHi [customer],\\nThanks for your email.\\nPlease note that the bust size of this dress is [verified measurement].\\nWe hope this helps.\\nThanks,\\n[Type your name here]\\n\\nImportant:\\n- Do not use \\\"40 inches\\\" unless that exact measurement is supplied or verified for the current product.\\n- Do not transfer measurements from one product to another.\\n- If the customer asks for a measurement that is not supplied, output ROUTE_TO_HUMAN.\\n\\nROUTE_TO_HUMAN if the email mentions:\\n- an existing order\\n- order number\\n- changing size after placing an order\\n- confirming what size will be sent\\n- dispatch\\n- shipping\\n- delivery\\n- stock availability\\n- wrong size received\\n- return\\n- exchange after delivery\\n- refund\\n- replacement\\n- complaint\\n- damaged item\\n- missing parcel\\n- unclear product\\n- unclear size\\n- anything requiring Shopify or order verification\\n\\nRULES:\\n- Never promise stock, availability, delivery, dispatch, or ship dates.\\n- Never say \\\"we will send it asap.\\\"\\n- Never say a size change has been made.\\n- Never say a specific size will be sent.\\n- Never invent measurements.\\n- Never apologise for an operational issue unless the issue is simple and already clear.\\n- If unsure, output ROUTE_TO_HUMAN.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Subject: \" + $json.subject + \"\\n\\nBody: \" + $json.plain_text_body\n    }\n  ],\n  \"temperature\": 0.3\n}) }}",
+        "options": {}
+      },
+      "id": "90bfc94b-e155-43ec-bf8b-6a9d97e78db3",
+      "name": "08 Drafter - DeepSeek Sweta Style",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        2704,
+        160
+      ],
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "dJCBy7BobVidLuWL",
+          "name": "Bearer Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.draft_body }}",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              },
+              "rightValue": "ROUTE_TO_HUMAN",
+              "id": "a9f33e8d-69c9-48f7-861c-a345570401db"
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "8092eecb-4123-47aa-967d-7c69413b6a35",
+      "name": "09 Guard - Route To Human",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        2928,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1C1uQHtipJ4pI5jCHGLsbUkyLRcyRTfcAwknPcWgt6CM",
+          "mode": "list",
+          "cachedResultName": "Email Automation",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1C1uQHtipJ4pI5jCHGLsbUkyLRcyRTfcAwknPcWgt6CM/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Logs",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1C1uQHtipJ4pI5jCHGLsbUkyLRcyRTfcAwknPcWgt6CM/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "timestamp",
+              "displayName": "timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "gmail_message_id",
+              "displayName": "gmail_message_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "gmail_thread_id",
+              "displayName": "gmail_thread_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "sender_email",
+              "displayName": "sender_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "subject",
+              "displayName": "subject",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "category",
+              "displayName": "category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "route",
+              "displayName": "route",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "confidence",
+              "displayName": "confidence",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "priority",
+              "displayName": "priority",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "sentiment",
+              "displayName": "sentiment",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "reason",
+              "displayName": "reason",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "draft_created",
+              "displayName": "draft_created",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "draft_body",
+              "displayName": "draft_body",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "status_label",
+              "displayName": "status_label",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "error_message",
+              "displayName": "error_message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "reviewer_notes",
+              "displayName": "reviewer_notes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "1cad98bf-60a2-42e3-bb6f-eb94e0d16ee8",
+      "name": "12 Sheets - Append Log (Custom)",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        3824,
+        400
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "bVd8A9aGmEVEd5z7",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "draft",
+        "subject": "={{ ($json.subject || '').toLowerCase().startsWith('re:') ? $json.subject : 'Re: ' + $json.subject }}",
+        "message": "={{ $json.draft_body }}",
+        "options": {
+          "threadId": "={{ $json.gmail_thread_id }}"
+        }
+      },
+      "id": "29e0a570-ee5f-4c50-9faa-36ab189723ca",
+      "name": "10 Gmail - Create Draft",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        3152,
+        112
+      ],
+      "webhookId": "ea4cb3d7-15f5-49d3-b707-a08502a9bc43",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "grHziRdEuSHrerms",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.gmail_message_id }}",
+        "labelIds": [
+          "Label_1",
+          "Label_6"
+        ]
+      },
+      "id": "e38bcebe-426f-4c52-b664-715c37dac293",
+      "name": "11 Gmail - Apply Labels (Draft)",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        3376,
+        112
+      ],
+      "webhookId": "82bce124-8b1c-46f6-918c-7ca474d21c14",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "grHziRdEuSHrerms",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1C1uQHtipJ4pI5jCHGLsbUkyLRcyRTfcAwknPcWgt6CM",
+          "mode": "list",
+          "cachedResultName": "Email Automation",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1C1uQHtipJ4pI5jCHGLsbUkyLRcyRTfcAwknPcWgt6CM/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Logs",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1C1uQHtipJ4pI5jCHGLsbUkyLRcyRTfcAwknPcWgt6CM/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "schema": [
+            {
+              "id": "timestamp",
+              "displayName": "timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "gmail_message_id",
+              "displayName": "gmail_message_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "gmail_thread_id",
+              "displayName": "gmail_thread_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "sender_email",
+              "displayName": "sender_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "subject",
+              "displayName": "subject",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "category",
+              "displayName": "category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "route",
+              "displayName": "route",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "confidence",
+              "displayName": "confidence",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "priority",
+              "displayName": "priority",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "sentiment",
+              "displayName": "sentiment",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "reason",
+              "displayName": "reason",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "draft_created",
+              "displayName": "draft_created",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "draft_body",
+              "displayName": "draft_body",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "status_label",
+              "displayName": "status_label",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c16a891c-befe-458a-bc97-912b868c9909",
+      "name": "12 Sheets - Append Log (Draft)",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        3824,
+        112
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "bVd8A9aGmEVEd5z7",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.gmail_message_id }}",
+        "labelIds": [
+          "Label_3",
+          "Label_7"
+        ]
+      },
+      "id": "b8669552-6142-472d-bd1b-26225902aab0",
+      "name": "11 Gmail - Apply Labels (No Reply)",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        2704,
+        624
+      ],
+      "webhookId": "d655ef78-6408-4261-a908-9891f3449ec1",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "grHziRdEuSHrerms",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1C1uQHtipJ4pI5jCHGLsbUkyLRcyRTfcAwknPcWgt6CM",
+          "mode": "list",
+          "cachedResultName": "Email Automation",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1C1uQHtipJ4pI5jCHGLsbUkyLRcyRTfcAwknPcWgt6CM/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Logs",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1C1uQHtipJ4pI5jCHGLsbUkyLRcyRTfcAwknPcWgt6CM/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "schema": [
+            {
+              "id": "timestamp",
+              "displayName": "timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "gmail_message_id",
+              "displayName": "gmail_message_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "gmail_thread_id",
+              "displayName": "gmail_thread_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "sender_email",
+              "displayName": "sender_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "subject",
+              "displayName": "subject",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "category",
+              "displayName": "category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "route",
+              "displayName": "route",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "confidence",
+              "displayName": "confidence",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "priority",
+              "displayName": "priority",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "sentiment",
+              "displayName": "sentiment",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "reason",
+              "displayName": "reason",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "draft_created",
+              "displayName": "draft_created",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "status_label",
+              "displayName": "status_label",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c20f66d1-7dc8-48d2-b419-20bb07ec0594",
+      "name": "12 Sheets - Append Log (No Reply)",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        3152,
+        624
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "bVd8A9aGmEVEd5z7",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "timestamp",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "2",
+              "name": "gmail_message_id",
+              "value": "={{ $json.gmail_message_id }}",
+              "type": "string"
+            },
+            {
+              "id": "3",
+              "name": "gmail_thread_id",
+              "value": "={{ $json.gmail_thread_id }}",
+              "type": "string"
+            },
+            {
+              "id": "4",
+              "name": "sender_email",
+              "value": "={{ $json.sender_email }}",
+              "type": "string"
+            },
+            {
+              "id": "5",
+              "name": "subject",
+              "value": "={{ $json.subject }}",
+              "type": "string"
+            },
+            {
+              "id": "6",
+              "name": "category",
+              "value": "={{ $json.category }}",
+              "type": "string"
+            },
+            {
+              "id": "7",
+              "name": "route",
+              "value": "={{ $json.route }}",
+              "type": "string"
+            },
+            {
+              "id": "8",
+              "name": "confidence",
+              "value": "={{ $json.confidence }}",
+              "type": "string"
+            },
+            {
+              "id": "9",
+              "name": "priority",
+              "value": "={{ $json.priority }}",
+              "type": "string"
+            },
+            {
+              "id": "10",
+              "name": "sentiment",
+              "value": "={{ $json.sentiment }}",
+              "type": "string"
+            },
+            {
+              "id": "11",
+              "name": "reason",
+              "value": "={{ $json.reason }}",
+              "type": "string"
+            },
+            {
+              "id": "12",
+              "name": "draft_created",
+              "value": "false",
+              "type": "string"
+            },
+            {
+              "id": "13",
+              "name": "status_label",
+              "value": "Needs Custom Reply",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "52708e38-e7dc-4b21-8dd7-e62148f11e9a",
+      "name": "Prepare Log (Custom)",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3600,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "timestamp",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "2",
+              "name": "gmail_message_id",
+              "value": "={{ $json.gmail_message_id }}",
+              "type": "string"
+            },
+            {
+              "id": "3",
+              "name": "gmail_thread_id",
+              "value": "={{ $json.gmail_thread_id }}",
+              "type": "string"
+            },
+            {
+              "id": "4",
+              "name": "sender_email",
+              "value": "={{ $json.sender_email }}",
+              "type": "string"
+            },
+            {
+              "id": "5",
+              "name": "subject",
+              "value": "={{ $json.subject }}",
+              "type": "string"
+            },
+            {
+              "id": "6",
+              "name": "category",
+              "value": "={{ $json.category }}",
+              "type": "string"
+            },
+            {
+              "id": "7",
+              "name": "route",
+              "value": "={{ $json.route }}",
+              "type": "string"
+            },
+            {
+              "id": "8",
+              "name": "confidence",
+              "value": "={{ $json.confidence }}",
+              "type": "string"
+            },
+            {
+              "id": "9",
+              "name": "priority",
+              "value": "={{ $json.priority }}",
+              "type": "string"
+            },
+            {
+              "id": "10",
+              "name": "sentiment",
+              "value": "={{ $json.sentiment }}",
+              "type": "string"
+            },
+            {
+              "id": "11",
+              "name": "reason",
+              "value": "={{ $json.reason }}",
+              "type": "string"
+            },
+            {
+              "id": "12",
+              "name": "draft_created",
+              "value": "true",
+              "type": "string"
+            },
+            {
+              "id": "13",
+              "name": "draft_body",
+              "value": "={{ $json.draft_body }}",
+              "type": "string"
+            },
+            {
+              "id": "14",
+              "name": "status_label",
+              "value": "AI Draft Created",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "66267c2a-dd80-4b8c-a8dc-1708c00e0139",
+      "name": "Prepare Log (Draft)",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3600,
+        112
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "timestamp",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "2",
+              "name": "gmail_message_id",
+              "value": "={{ $json.gmail_message_id }}",
+              "type": "string"
+            },
+            {
+              "id": "3",
+              "name": "gmail_thread_id",
+              "value": "={{ $json.gmail_thread_id }}",
+              "type": "string"
+            },
+            {
+              "id": "4",
+              "name": "sender_email",
+              "value": "={{ $json.sender_email }}",
+              "type": "string"
+            },
+            {
+              "id": "5",
+              "name": "subject",
+              "value": "={{ $json.subject }}",
+              "type": "string"
+            },
+            {
+              "id": "6",
+              "name": "category",
+              "value": "={{ $json.category }}",
+              "type": "string"
+            },
+            {
+              "id": "7",
+              "name": "route",
+              "value": "={{ $json.route }}",
+              "type": "string"
+            },
+            {
+              "id": "8",
+              "name": "confidence",
+              "value": "={{ $json.confidence }}",
+              "type": "string"
+            },
+            {
+              "id": "9",
+              "name": "priority",
+              "value": "={{ $json.priority }}",
+              "type": "string"
+            },
+            {
+              "id": "10",
+              "name": "sentiment",
+              "value": "={{ $json.sentiment }}",
+              "type": "string"
+            },
+            {
+              "id": "11",
+              "name": "reason",
+              "value": "={{ $json.reason }}",
+              "type": "string"
+            },
+            {
+              "id": "12",
+              "name": "draft_created",
+              "value": "false",
+              "type": "string"
+            },
+            {
+              "id": "13",
+              "name": "status_label",
+              "value": "No Reply Needed",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "cdffc3ed-8858-4eba-8713-c9b2597194db",
+      "name": "Prepare Log (No Reply)",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2928,
+        624
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1C1uQHtipJ4pI5jCHGLsbUkyLRcyRTfcAwknPcWgt6CM",
+          "mode": "list",
+          "cachedResultName": "Email Automation",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1C1uQHtipJ4pI5jCHGLsbUkyLRcyRTfcAwknPcWgt6CM/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1299723527,
+          "mode": "list",
+          "cachedResultName": "Settings",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1C1uQHtipJ4pI5jCHGLsbUkyLRcyRTfcAwknPcWgt6CM/edit#gid=1299723527"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Key",
+              "lookupValue": "killswitch"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1584,
+        448
+      ],
+      "id": "1d9ebf66-0253-4fcf-a0c3-69bf134376b5",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "bVd8A9aGmEVEd5z7",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "p1-check-condition",
+              "leftValue": "={{ $json.priority }}",
+              "rightValue": "P1",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "6a991768-1c27-40a1-a8ff-a5abba6b9ecc",
+      "name": "Check if P1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        4048,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "saswetaagarwal17@gmail.com",
+        "subject": "URGENT P1: Customer Service Escalation",
+        "emailType": "text",
+        "message": "={{ \"A high-priority (P1) email requires your immediate attention.\\n\\nReason: \" + $json.reason + \"\\nCategory: \" + $json.category }}",
+        "options": {}
+      },
+      "id": "4ce9215a-396a-4092-a063-8e521fb6774e",
+      "name": "Send P1 Alert",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        4272,
+        400
+      ],
+      "webhookId": "9ac57112-39b4-47c7-ac53-590476f2b7f3",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "grHziRdEuSHrerms",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "802cfd2e-f457-4398-9b1d-f5ffac13f603",
+              "leftValue": "={{ $json.priority }}",
+              "rightValue": "P1",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "b853716e-336c-48ff-b384-c698dbcafa14",
+      "name": "Check Custom Priority",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        3152,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.gmail_message_id }}",
+        "labelIds": [
+          "Label_2",
+          "Label_5",
+          "STARRED"
+        ]
+      },
+      "id": "2fb417fa-a903-47db-91b2-bfdcd5f952cb",
+      "name": "11 Gmail - Apply Labels (Custom P1)",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        3376,
+        304
+      ],
+      "webhookId": "c0238489-41c3-433b-8a27-ff7f60a00b64",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "grHziRdEuSHrerms",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.gmail_message_id }}",
+        "labelIds": [
+          "Label_2",
+          "Label_6"
+        ]
+      },
+      "id": "db2bd94e-bf32-45c9-9490-fd143b5e42d2",
+      "name": "11 Gmail - Apply Labels (Custom P2)",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        3376,
+        496
+      ],
+      "webhookId": "c6a1e6ae-2f10-4286-a5f5-1640dddff6a0",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "grHziRdEuSHrerms",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const settings = $input.all();\nconst killSwitchValue = settings[0]?.json?.Value;\n\nif (killSwitchValue !== 'ON') {\n  return [];\n}\n\nreturn $items('Dedupe - Restore Email Items');"
+      },
+      "id": "56264535-5830-44a9-91fd-c1834b43ce05",
+      "name": "Kill Switch - Pass Email Items",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1808,
+        448
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const passedItems = $input.all();\nconst originalEmailItems = $items('04 Prepare Email Fields');\n\nreturn passedItems.map((item, index) => {\n  const pairedItem = Array.isArray(item.pairedItem)\n    ? item.pairedItem[0]\n    : item.pairedItem;\n\n  const originalIndex = pairedItem?.item ?? index;\n  const original = originalEmailItems[originalIndex]?.json || {};\n\n  return {\n    json: {\n      ...original\n    }\n  };\n});"
+      },
+      "id": "db201155-5b56-4428-ae60-514e2006fea9",
+      "name": "Dedupe - Restore Email Items",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1360,
+        448
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const drafterItems = $input.all();\nconst originalDraftItems = $items('07 Switch - Route');\n\nreturn drafterItems.map((item, index) => {\n  const original = originalDraftItems[index]?.json || {};\n\n  const draftBody =\n    item.json.choices?.[0]?.message?.content ||\n    item.json.message?.content ||\n    item.json.content ||\n    item.json.text ||\n    '';\n\n  return {\n    json: {\n      ...original,\n      draft_body: String(draftBody).trim(),\n      drafter_raw_response: item.json\n    }\n  };\n});"
+      },
+      "id": "6c6b891e-0b4a-4681-8564-7c30bea0a628",
+      "name": "Merge Drafter Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2816,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const createDraftItems = $input.all();\nconst originalDraftItems = $items('Merge Drafter Response');\n\nreturn createDraftItems.map((item, index) => {\n  const original = originalDraftItems[index]?.json || {};\n  return {\n    json: {\n      ...original,\n      created_draft_response: item.json\n    }\n  };\n});"
+      },
+      "id": "50da0541-a5ea-443f-8577-20c37e9b4e8a",
+      "name": "Merge Created Draft Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3264,
+        112
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const labelItems = $input.all();\nconst originalItems = $items('Check Custom Priority', 0);\nreturn labelItems.map((item, index) => {\n  const original = originalItems[index]?.json || {};\n  return {\n    json: {\n      ...original,\n      custom_label_response: item.json\n    }\n  };\n});"
+      },
+      "id": "e9c0e880-35ce-42ae-9673-0e094b55e681",
+      "name": "Merge Custom P1 Label Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3488,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const labelItems = $input.all();\nconst originalItems = $items('Check Custom Priority', 1);\nreturn labelItems.map((item, index) => {\n  const original = originalItems[index]?.json || {};\n  return {\n    json: {\n      ...original,\n      custom_label_response: item.json\n    }\n  };\n});"
+      },
+      "id": "07c2aa1e-025a-4cc7-b201-002de037c093",
+      "name": "Merge Custom P2 Label Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3488,
+        496
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const labelItems = $input.all();\nconst originalItems = $items('Merge Created Draft Response');\nreturn labelItems.map((item, index) => {\n  const original = originalItems[index]?.json || {};\n  return {\n    json: {\n      ...original,\n      draft_label_response: item.json\n    }\n  };\n});"
+      },
+      "id": "33392b27-a639-4cf0-a161-f0a8ae3db72e",
+      "name": "Merge Draft Label Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3488,
+        112
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const labelItems = $input.all();\nconst originalItems = $items('07 Switch - Route', 2);\nreturn labelItems.map((item, index) => {\n  const original = originalItems[index]?.json || {};\n  return {\n    json: {\n      ...original,\n      no_reply_label_response: item.json\n    }\n  };\n});"
+      },
+      "id": "03059e05-3746-4905-ae95-b06b26e8e2aa",
+      "name": "Merge No Reply Label Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2816,
+        624
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Stop If Already Processed": {
+      "main": [
+        [
+          {
+            "node": "Dedupe - Restore Email Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "01 Gmail Trigger - New Test Email": {
+      "main": [
+        [
+          {
+            "node": "02 Filter - Ignore Non Customer Emails",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "02 Filter - Ignore Non Customer Emails": {
+      "main": [
+        [
+          {
+            "node": "04 Prepare Email Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "03 Dedupe - Check Message ID": {
+      "main": [
+        [
+          {
+            "node": "Stop If Already Processed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "04 Prepare Email Fields": {
+      "main": [
+        [
+          {
+            "node": "03 Dedupe - Check Message ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05 Classifier - DeepSeek": {
+      "main": [
+        [
+          {
+            "node": "06 Parse Classifier JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "06 Parse Classifier JSON": {
+      "main": [
+        [
+          {
+            "node": "07 Switch - Route",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "07 Switch - Route": {
+      "main": [
+        [
+          {
+            "node": "08 Drafter - DeepSeek Sweta Style",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Check Custom Priority",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "11 Gmail - Apply Labels (No Reply)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "09 Guard - Route To Human": {
+      "main": [
+        [
+          {
+            "node": "Check Custom Priority",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "10 Gmail - Create Draft",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Log (Custom)": {
+      "main": [
+        [
+          {
+            "node": "12 Sheets - Append Log (Custom)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Log (Draft)": {
+      "main": [
+        [
+          {
+            "node": "12 Sheets - Append Log (Draft)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Log (No Reply)": {
+      "main": [
+        [
+          {
+            "node": "12 Sheets - Append Log (No Reply)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Kill Switch - Pass Email Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "12 Sheets - Append Log (Custom)": {
+      "main": [
+        [
+          {
+            "node": "Check if P1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check if P1": {
+      "main": [
+        [
+          {
+            "node": "Send P1 Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Custom Priority": {
+      "main": [
+        [
+          {
+            "node": "11 Gmail - Apply Labels (Custom P1)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "11 Gmail - Apply Labels (Custom P2)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Kill Switch - Pass Email Items": {
+      "main": [
+        [
+          {
+            "node": "05 Classifier - DeepSeek",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Dedupe - Restore Email Items": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "08 Drafter - DeepSeek Sweta Style": {
+      "main": [
+        [
+          {
+            "node": "Merge Drafter Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Drafter Response": {
+      "main": [
+        [
+          {
+            "node": "09 Guard - Route To Human",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "10 Gmail - Create Draft": {
+      "main": [
+        [
+          {
+            "node": "Merge Created Draft Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Created Draft Response": {
+      "main": [
+        [
+          {
+            "node": "11 Gmail - Apply Labels (Draft)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "11 Gmail - Apply Labels (Custom P1)": {
+      "main": [
+        [
+          {
+            "node": "Merge Custom P1 Label Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Custom P1 Label Response": {
+      "main": [
+        [
+          {
+            "node": "Prepare Log (Custom)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "11 Gmail - Apply Labels (Custom P2)": {
+      "main": [
+        [
+          {
+            "node": "Merge Custom P2 Label Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Custom P2 Label Response": {
+      "main": [
+        [
+          {
+            "node": "Prepare Log (Custom)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "11 Gmail - Apply Labels (Draft)": {
+      "main": [
+        [
+          {
+            "node": "Merge Draft Label Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Draft Label Response": {
+      "main": [
+        [
+          {
+            "node": "Prepare Log (Draft)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "11 Gmail - Apply Labels (No Reply)": {
+      "main": [
+        [
+          {
+            "node": "Merge No Reply Label Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge No Reply Label Response": {
+      "main": [
+        [
+          {
+            "node": "Prepare Log (No Reply)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": true
+  },
+  "versionId": "858bbec4-6bf5-4455-a06f-1b340c690be1",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "aiBuilderAssisted": true,
+    "builderVariant": "mcp",
+    "instanceId": "fb729a89181bf195e906bce030d8102e40127e28979aa63bdad253ea12f964f0"
+  },
+  "id": "zqab0zWEXSaaIXh4",
+  "tags": []
+}
