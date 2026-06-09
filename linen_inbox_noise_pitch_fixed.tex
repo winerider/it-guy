@@ -1,5 +1,5 @@
 % =====================================================================
-%  Linen Connections - Inbox Noise Pitch
+%  Linen Connections - Inbox Noise Pitch  (plain-language edition)
 %  Compile with: pdflatex (works out-of-the-box on Overleaf)
 %  Present the resulting PDF in fullscreen; \pause acts as animations.
 % =====================================================================
@@ -52,7 +52,7 @@
 
 % ---------- Title metadata -------------------------------------------
 \title{Cut the Inbox Noise}
-\subtitle{A zero-risk first win for \texttt{orders@linenconnections.com.au}}
+\subtitle{A safe, easy first win for \texttt{orders@linenconnections.com.au}}
 \author{}
 \date{}
 
@@ -67,9 +67,9 @@
   \begin{center}
     {\Huge\bfseries\textcolor{teal}{Cut the Inbox Noise}}\\[0.5em]
     \textcolor{terra}{\rule{4em}{2.5pt}}\\[0.8em]
-    {\large\textcolor{ink}{A zero-risk first win before we build more AI}}\\[2.5em]
-    {\normalsize\textcolor{muted}{Gmail filters for \texttt{orders@linenconnections.com.au}}}\\[3em]
-    {\footnotesize\textcolor{muted}{Prepared for review $\cdot$ Linen Connections customer-service workflow}}
+    {\large\textcolor{ink}{A quick, no-risk clean-up before we add more AI}}\\[2.5em]
+    {\normalsize\textcolor{muted}{Tidying up \texttt{orders@linenconnections.com.au}}}\\[3em]
+    {\footnotesize\textcolor{muted}{Prepared for review $\cdot$ Linen Connections customer-service inbox}}
   \end{center}
 \end{frame}
 }
@@ -79,18 +79,18 @@
   \vspace{0.5cm}
   \begin{center}
     {\fontsize{64}{72}\selectfont\bfseries\textcolor{terra}{65--75\%}}\\[0.6em]
-    {\large of everything in \texttt{orders@} is \textbf{not a customer}}\\[1.5em]
+    {\large of the email in \texttt{orders@} is \textbf{not from a customer}}\\[1.5em]
   \end{center}
   \pause
-  \begin{block}{What that means}
-    The team opens a wall of hundreds of emails every day --- but most of it
-    is robots talking to robots. The real customers are a small minority
-    hidden inside the pile.
+  \begin{block}{In plain words}
+    Every day the team opens hundreds of emails. But most of them are just
+    computers sending automatic updates to each other. The few real customers
+    are hidden in the middle of that big pile.
   \end{block}
 \end{frame}
 
 % ---- Slide: inbox composition chart ---------------------------------
-\begin{frame}{Where the volume actually goes}
+\begin{frame}{Where all the email actually comes from}
   \vspace{0.35cm}
   \begin{center}
   \begin{tikzpicture}[x=0.105\textwidth,y=1cm]
@@ -100,7 +100,7 @@
     \draw[fill=terra,draw=none] (7.4,0) rectangle (10,1.0);
     \draw[ink,thick] (0,0) rectangle (10,1.0);
 
-    \node[white,font=\bfseries] at (3.5,0.5) {70\% system notifications};
+    \node[white,font=\bfseries] at (3.5,0.5) {70\% automatic updates};
     \node[white,font=\bfseries\scriptsize,rotate=90] at (7.2,0.5) {4\%};
     \node[white,font=\bfseries] at (8.7,0.5) {26\% real customers};
 
@@ -108,130 +108,229 @@
       {Shopify orders / payouts\\AusPost / Judge.me};
     \node[align=center,font=\small,text=teal] at (7.2,-0.55) {Marketing};
     \node[align=center,font=\small,text=terra] at (8.7,-0.55)
-      {What the team actually\\needs to handle};
+      {The emails the team\\actually needs to answer};
   \end{tikzpicture}
   \end{center}
   \vspace{0.75cm}
   \begin{block}{}
     \centering\small
-    Most of the daily volume is predictable notification mail. The customer stream is the minority hiding inside it.
+    Think of it like a letterbox stuffed with junk mail. Only about 1 in 4
+    letters is a real customer who needs a reply.
   \end{block}
 \end{frame}
 
 % ---- Slide: what the noise is ---------------------------------------
-\begin{frame}{What the noise is made of}
+\begin{frame}{What the ``noise'' actually is}
   \vspace{0.2cm}
   \small
   \begin{tabular}{@{}p{4.6cm}p{8.6cm}@{}}
-    \textcolor{teal}{\textbf{Shopify order alerts}} & ``New order \#44xxx placed'' --- one per sale \\[0.4em]
-    \textcolor{teal}{\textbf{Shopify payouts}}       & ``A payout is on its way'' \\[0.4em]
-    \textcolor{teal}{\textbf{AusPost notifications}}  & Label created / in transit / delivered \\[0.4em]
+    \textcolor{teal}{\textbf{Shopify order alerts}} & ``New order \#44xxx placed'' --- one for every sale \\[0.4em]
+    \textcolor{teal}{\textbf{Shopify payouts}}       & ``Your money is on its way'' \\[0.4em]
+    \textcolor{teal}{\textbf{AusPost updates}}        & Label made / posted / delivered \\[0.4em]
     \textcolor{teal}{\textbf{Judge.me reviews}}       & ``You have a new review'' \\[0.4em]
-    \textcolor{teal}{\textbf{Marketing / newsletters}}& Supplier mail, Substack, agency pitches, cold outreach \\[0.4em]
-    \textcolor{terra}{\textbf{Shopify chat relays}}   & \textbf{NOT noise} --- real customers via the website chat \\
+    \textcolor{teal}{\textbf{Marketing / newsletters}}& Suppliers, sales pitches, cold emails \\[0.4em]
+    \textcolor{terra}{\textbf{Website chat messages}} & \textbf{This IS a customer} --- a real person using the website chat \\
   \end{tabular}
   \vspace{0.6em}
   \pause
   \begin{block}{}
-    \footnotesize All of these are \textbf{predictable, repeating senders} --- exactly what
-    a filter is good at catching automatically.
+    \footnotesize Notice the pattern: the noise always comes from the
+    \textbf{same handful of computers}. That makes it very easy to spot and
+    sort automatically.
   \end{block}
+\end{frame}
+
+% ---- Slide: real-world example --------------------------------------
+\begin{frame}{A real Monday morning}
+  \vspace{0.3cm}
+  \begin{block}{The story}
+    \small
+    The inbox shows \textbf{312 new emails}. About \textbf{248} are just
+    automatic updates. Sitting at email \textbf{number 180} is a customer whose
+    parcel arrived \textbf{damaged}, asking for a refund.
+  \end{block}
+  \vspace{0.6em}
+  \begin{itemize}\setlength\itemsep{0.55em}
+    \item[\textcolor{terra}{$\rightarrow$}] \textbf{Today:} that upset customer waits hours while someone scrolls past 179 robot emails to reach them.
+    \pause
+    \item[\textcolor{teal}{$\rightarrow$}] \textbf{After this clean-up:} the robot emails step aside, so that same email is 1 of only $\sim$60 real ones --- and gets seen in \textbf{minutes}.
+  \end{itemize}
+  \vspace{0.5em}
+  \pause
+  \begin{center}\small\textcolor{muted}{Same inbox. Same team. The important email just stops hiding.}\end{center}
 \end{frame}
 
 % ---- Slide: the cost ------------------------------------------------
-\begin{frame}{What it's costing us right now}
+\begin{frame}{What this is costing us right now}
   \vspace{0.4cm}
   \begin{itemize}\setlength\itemsep{1.1em}
-    \item[\textcolor{terra}{1.}] \textbf{The team feels buried.} The overwhelm is mostly fake ---
-          attention tax on automated mail.
+    \item[\textcolor{terra}{1.}] \textbf{The team feels swamped.} Most of that ``busy'' feeling
+          comes from emails no human ever needed to read.
     \pause
-    \item[\textcolor{terra}{2.}] \textbf{Real customers get missed.} High-stakes emails (refunds, damaged
-          items) hide inside hundreds of notifications.
+    \item[\textcolor{terra}{2.}] \textbf{Real customers slip through.} The important ones (refunds,
+          damaged items) hide behind hundreds of robot emails.
     \pause
-    \item[\textcolor{terra}{3.}] \textbf{The AI wastes effort.} Every notification wakes up the workflow and
-          burns a classification call just to conclude ``this is a robot.''
+    \item[\textcolor{terra}{3.}] \textbf{The AI wastes work (and money).} Every robot email wakes up
+          the AI, which then spends a paid step just to say ``this one's a robot.''
   \end{itemize}
 \end{frame}
 
-% ---- Slide: the fix -------------------------------------------------
-\begin{frame}{The fix: Gmail filters}
+% ---- Slide: what is a label -----------------------------------------
+\begin{frame}{First --- what is a ``label''?}
   \vspace{0.3cm}
-  \begin{block}{One simple rule, applied automatically to every email}
+  \begin{block}{The simple idea}
     \centering\large
-    \textcolor{teal}{\textbf{Match the sender}} \;$\rightarrow$\;
-    \textcolor{terra}{\textbf{Label it + skip the inbox}}
+    A label is just a \textcolor{terra}{\textbf{coloured sticker}} you put on an email.
   \end{block}
   \vspace{0.8em}
   \begin{itemize}\setlength\itemsep{0.7em}
-    \item Noise is \textbf{labelled and archived} --- out of view, still fully searchable.
-    \item Real customers \textbf{stay in the inbox} (and feed the AI).
-    \item \textbf{Nothing is deleted}, nothing is replied to --- filters only organise.
+    \item[\textcolor{teal}{$\bullet$}] \textbf{It sorts your mail for you.} Put an ``AusPost'' sticker on every
+          delivery update, and you can see all of them together in one click.
+    \item[\textcolor{teal}{$\bullet$}] \textbf{It tidies up without throwing anything away.} You can tell Gmail
+          ``add the sticker and keep it out of my inbox.'' The email is filed
+          safely away --- never deleted, and always there if you search for it.
+  \end{itemize}
+  \vspace{0.5em}
+  \pause
+  \begin{center}\small\textcolor{muted}{Like sorting post into trays --- nothing is binned, it's just put in the right place.}\end{center}
+\end{frame}
+
+% ---- Slide: the fix -------------------------------------------------
+\begin{frame}{The fix: let Gmail sort the mail for us}
+  \vspace{0.3cm}
+  \begin{block}{One simple rule, run automatically on every email}
+    \centering\large
+    \textcolor{teal}{\textbf{Recognise the sender}} \;$\rightarrow$\;
+    \textcolor{terra}{\textbf{Add a sticker + tuck it away}}
+  \end{block}
+  \vspace{0.8em}
+  \begin{itemize}\setlength\itemsep{0.7em}
+    \item Robot emails get \textbf{labelled and filed away} --- out of sight, still easy to find.
+    \item Real customers \textbf{stay in the inbox} (and get handed to the AI).
+    \item \textbf{Nothing is deleted, nothing is replied to.} The rule only tidies up.
   \end{itemize}
 \end{frame}
 
 % ---- Slide: why this first ------------------------------------------
-\begin{frame}{Why this is the best first move}
+\begin{frame}{Why do this first?}
   \vspace{0.05cm}
   \begin{center}
   \begin{tikzpicture}[x=0.86cm,y=0.62cm]
     \draw[-{Stealth[length=3mm]},thick,muted] (0,0) -- (9,0) node[right,font=\small]{Effort};
-    \draw[-{Stealth[length=3mm]},thick,muted] (0,0) -- (0,5.1) node[above,font=\small]{Impact};
+    \draw[-{Stealth[length=3mm]},thick,muted] (0,0) -- (0,5.1) node[above,font=\small]{Payoff};
     % our item: high impact, low effort
     \fill[terra] (1.4,4.25) circle (6pt);
     \node[anchor=west,align=left,font=\small\bfseries,text=teal] at (1.75,4.25)
-      {Gmail filters\\\textit{(we are here)}};
+      {Sort the inbox\\\textit{(we are here)}};
     % other initiatives
     \fill[muted] (6.6,4.0) circle (4pt);
-    \node[muted,font=\scriptsize,align=center] at (6.95,3.35) {Product metafields};
+    \node[muted,font=\scriptsize,align=center] at (6.95,3.35) {Product details};
     \fill[muted] (7.4,2.4) circle (4pt);
-    \node[muted,font=\scriptsize,align=center] at (7.35,1.65) {Substitution\\ workflow fix};
+    \node[muted,font=\scriptsize,align=center] at (7.35,1.65) {Substitution\\ fix};
     \fill[muted] (5.2,1.55) circle (4pt);
-    \node[muted,font=\scriptsize,align=center] at (4.85,0.85) {Policy KB};
+    \node[muted,font=\scriptsize,align=center] at (4.85,0.85) {Policy guide};
   \end{tikzpicture}
   \end{center}
   \vspace{-0.1cm}
   {\small
   \begin{itemize}\setlength\itemsep{0.25em}
-    \item[\textcolor{terra}{$\bullet$}] \textbf{Largest segment:} attacks the 65--75\%, not the minority.
-    \item[\textcolor{terra}{$\bullet$}] \textbf{Zero dependencies:} needs no product data, no policy, no AI changes.
-    \item[\textcolor{terra}{$\bullet$}] \textbf{Zero customer risk:} filters never send anything.
+    \item[\textcolor{terra}{$\bullet$}] \textbf{Biggest chunk first:} it tackles the 65--75\%, not the small part.
+    \item[\textcolor{terra}{$\bullet$}] \textbf{Nothing else needed:} no product data, no policy, no AI changes.
+    \item[\textcolor{terra}{$\bullet$}] \textbf{No risk to customers:} the rule never sends or deletes anything.
   \end{itemize}}
 \end{frame}
 
 % ---- Slide: the one rule we must get right --------------------------
-\begin{frame}{The one thing we must get right}
+\begin{frame}{The one thing we must be careful about}
   \vspace{0.4cm}
-  \begin{block}{Do not bury Shopify chat relays}
-    When a customer uses the website chat, Shopify relays it into \texttt{orders@}
-    as an email. It \emph{looks} system-generated, but it's a \textbf{real customer}.
+  \begin{block}{Don't accidentally hide website chat messages}
+    When a customer types in the website chat, Shopify forwards it to
+    \texttt{orders@} as an email. It \emph{looks} like a robot email, but it is a
+    \textbf{real person} waiting for help.
   \end{block}
   \vspace{0.8em}
   \begin{itemize}\setlength\itemsep{0.6em}
-    \item[\textcolor{teal}{\checkmark}] Filter Shopify \textbf{order / payout / system} mail $\rightarrow$ archive.
-    \item[\textcolor{terra}{$\times$}] Never write a blanket ``from: shopify.com $\rightarrow$ archive'' rule.
-    \item[\textcolor{teal}{\checkmark}] Give chat relays their \textbf{own label} and keep them in the inbox.
+    \item[\textcolor{teal}{\checkmark}] Tidy away Shopify \textbf{order / payout / system} emails.
+    \item[\textcolor{terra}{$\times$}] Never make a lazy ``hide everything from Shopify'' rule.
+    \item[\textcolor{teal}{\checkmark}] Give chat messages \textbf{their own sticker} and keep them in the inbox.
   \end{itemize}
 \end{frame}
 
 % ---- Slide: safe rollout --------------------------------------------
-\begin{frame}{How we roll it out safely}
+\begin{frame}{How we turn it on safely}
   \vspace{0.3cm}
   \begin{enumerate}\setlength\itemsep{0.8em}
-    \item \textbf{Label only first.} Apply labels but keep everything in the inbox for a few days.
+    \item \textbf{Stickers only, at first.} Add the labels but leave every email in the inbox for a few days.
     \pause
-    \item \textbf{Verify the catch.} Apply retroactively and skim each label --- confirm no real customers landed in ``Notifications''.
+    \item \textbf{Check nothing important got mislabelled.} Look through each sticker and confirm no real customer landed in the wrong tray.
     \pause
-    \item \textbf{Then archive.} Turn on ``skip inbox + mark read'' only once a label has proven clean.
+    \item \textbf{Then start tucking away.} Only once a sticker is proven safe do we let those emails skip the inbox.
     \pause
-    \item \textbf{Never delete.} Archive keeps everything searchable for disputes.
+    \item \textbf{Never delete.} Everything stays searchable forever, in case of a dispute.
   \end{enumerate}
   \vspace{0.6em}
   \pause
-  \begin{center}\small\textcolor{muted}{Fully reversible at every step.}\end{center}
+  \begin{center}\small\textcolor{muted}{We can undo any step at any time.}\end{center}
+\end{frame}
+
+% ---- Slide: what the n8n workflow is (plain language) ---------------
+\begin{frame}{What the ``AI assistant'' (n8n) actually does}
+  \vspace{0.25cm}
+  \begin{block}{Think of it as a tireless junior assistant}
+    \small
+    n8n is a tool that does a set of steps automatically, like a recipe. Ours
+    reads each real customer email and gets it ready --- but a \textbf{human always
+    presses send.}
+  \end{block}
+  \vspace{0.5em}
+  \small
+  \begin{enumerate}\setlength\itemsep{0.35em}
+    \item \textbf{Watches} the inbox for a new customer email.
+    \item \textbf{Ignores} obvious junk (auto-replies, bounced mail).
+    \item \textbf{Checks} it hasn't already handled this one (no double-ups).
+    \item \textbf{Reads \& sorts it} with AI: can I safely draft a reply, does a
+          human need to handle this, or is no reply needed?
+    \item If safe: \textbf{writes a draft} reply in Sweta's voice --- and \emph{stops}.
+    \item \textbf{Adds a sticker} and notes it in a logbook (a Google Sheet).
+  \end{enumerate}
+\end{frame}
+
+% ---- Slide: the n8n workflow as a picture ---------------------------
+\begin{frame}{The AI assistant, as a picture}
+  \vspace{0.3cm}
+  \begin{center}
+  \begin{tikzpicture}[
+      node distance=0.55cm and 0.7cm,
+      box/.style={rectangle,rounded corners,draw=teal,thick,fill=sand,
+                  minimum height=0.9cm,minimum width=2.0cm,align=center,font=\scriptsize},
+      dec/.style={diamond,aspect=1.6,draw=terra,thick,fill=white,
+                  align=center,font=\scriptsize,inner sep=1pt},
+      out/.style={rectangle,rounded corners,draw=muted,thick,fill=white,
+                  minimum height=0.8cm,minimum width=2.2cm,align=center,font=\scriptsize},
+      arr/.style={-{Stealth[length=2mm]},thick,teal}]
+    \node[box] (in) {New customer\\ email};
+    \node[box,right=of in] (clean) {Skip junk\\ \& double-ups};
+    \node[dec,right=of clean] (ai) {AI reads\\ \& sorts};
+    \node[out,right=1.0cm of ai] (draft) {\textbf{Draft a reply}\\(waits for a human)};
+    \node[out,below=0.45cm of draft] (human) {\textbf{Send to a human}\\(tricky / upset)};
+    \node[out,above=0.45cm of draft] (none) {\textbf{No reply}\\(just a thank-you)};
+    \draw[arr] (in) -- (clean);
+    \draw[arr] (clean) -- (ai);
+    \draw[arr] (ai) -- (draft);
+    \draw[arr,terra] (ai.east) .. controls +(0.6,0.7) .. (none.west);
+    \draw[arr,terra] (ai.east) .. controls +(0.6,-0.7) .. (human.west);
+  \end{tikzpicture}
+  \end{center}
+  \vspace{0.5em}
+  \begin{itemize}\setlength\itemsep{0.3em}
+    \item[\textcolor{terra}{$\bullet$}] The AI \textbf{never sends on its own} --- it only prepares a draft for a person to check.
+    \item[\textcolor{terra}{$\bullet$}] Anything tricky or emotional goes \textbf{straight to a human}.
+    \item[\textcolor{terra}{$\bullet$}] There is an \textbf{off-switch}, and every email is written down in a logbook.
+  \end{itemize}
 \end{frame}
 
 % ---- Slide: how it fits the AI workflow -----------------------------
-\begin{frame}{How it fits the bigger picture}
+\begin{frame}{Why the clean-up comes first}
   \vspace{0.4cm}
   \begin{center}
   \begin{tikzpicture}[
@@ -239,11 +338,11 @@
       box/.style={rectangle,rounded corners,draw=teal,thick,fill=sand,
                   minimum height=1cm,minimum width=2.4cm,align=center,font=\small},
       arr/.style={-{Stealth[length=2.5mm]},thick,teal}]
-    \node[box] (incoming) {Incoming\\ mail};
-    \node[box,right=of incoming,fill=terra,text=white,draw=terra] (flt) {Gmail\\ filters};
+    \node[box] (incoming) {All\\ incoming mail};
+    \node[box,right=of incoming,fill=terra,text=white,draw=terra] (flt) {Sort the\\ inbox};
     \node[box,right=of flt] (cust) {Real\\ customers};
-    \node[box,right=of cust] (ai) {n8n AI\\ workflow};
-    \node[box,below=0.9cm of flt,draw=muted] (arch) {Archived\\ noise};
+    \node[box,right=of cust] (ai) {AI\\ assistant};
+    \node[box,below=0.9cm of flt,draw=muted] (arch) {Robot mail\\ filed away};
     \draw[arr] (incoming) -- (flt);
     \draw[arr] (flt) -- (cust);
     \draw[arr] (cust) -- (ai);
@@ -252,22 +351,22 @@
   \end{center}
   \vspace{0.6em}
   \begin{itemize}\setlength\itemsep{0.4em}
-    \item[\textcolor{terra}{$\bullet$}] The AI only ever sees \textbf{plausible customer mail} --- cheaper, cleaner, fewer mistakes.
-    \item[\textcolor{terra}{$\bullet$}] This is the foundation every later AI improvement sits on top of.
+    \item[\textcolor{terra}{$\bullet$}] The AI only ever sees \textbf{real customer mail} --- so it's cheaper, faster, and makes fewer mistakes.
+    \item[\textcolor{terra}{$\bullet$}] A clean inbox is the \textbf{foundation} everything else is built on.
   \end{itemize}
 \end{frame}
 
 % ---- Slide: the ask -------------------------------------------------
-\begin{frame}{The ask}
+\begin{frame}{What I'm asking for}
   \vspace{0.5cm}
-  \begin{block}{What I'm proposing}
-    Let me set up the Gmail filter rule-set this week, roll it out label-first,
-    and report back the before/after inbox count.
+  \begin{block}{The proposal}
+    Let me set up the sorting rules this week, switch them on stickers-first,
+    and show you the before/after inbox count.
   \end{block}
   \vspace{1em}
   \begin{itemize}\setlength\itemsep{0.7em}
-    \item[\textcolor{terra}{$\bullet$}] \textbf{Time:} a few hours of setup, no new tools or cost.
-    \item[\textcolor{terra}{$\bullet$}] \textbf{Risk:} reversible at every step; nothing sent, nothing deleted.
+    \item[\textcolor{terra}{$\bullet$}] \textbf{Time:} a few hours to set up. No new tools, no extra cost.
+    \item[\textcolor{terra}{$\bullet$}] \textbf{Risk:} undo-able at every step --- nothing sent, nothing deleted.
     \item[\textcolor{terra}{$\bullet$}] \textbf{Payoff:} a calm, customer-only inbox --- and a cheaper, safer AI.
   \end{itemize}
 \end{frame}
@@ -278,7 +377,7 @@
 \begin{frame}[plain]
   \vspace{2.2cm}
   \begin{center}
-    {\Huge\bfseries\textcolor{white}{Fix the noise first.}}\\[0.6em]
+    {\Huge\bfseries\textcolor{white}{Clear the clutter first.}}\\[0.6em]
     {\large\textcolor{sand}{Then let the AI do the clever part.}}\\[2.5em]
     \textcolor{terra}{\rule{5em}{2.5pt}}
   \end{center}
