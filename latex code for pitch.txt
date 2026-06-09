@@ -356,18 +356,168 @@
   \end{itemize}
 \end{frame}
 
+% =====================================================================
+%  SECTION 2 — THE FUTURE: where this goes after the quick win
+% =====================================================================
+
+% ---- Section divider ------------------------------------------------
+{
+\setbeamercolor{background canvas}{bg=sand}
+\begin{frame}[plain]
+  \vspace{2.2cm}
+  \begin{center}
+    {\large\textcolor{muted}{Part 2}}\\[0.5em]
+    {\Huge\bfseries\textcolor{teal}{This is just step one}}\\[0.6em]
+    \textcolor{terra}{\rule{4em}{2.5pt}}\\[0.8em]
+    {\large\textcolor{ink}{Here's the bigger picture I want to build with you}}
+  \end{center}
+\end{frame}
+}
+
+% ---- Slide: the staircase / vision ----------------------------------
+\begin{frame}{Every win makes the next one possible}
+  \vspace{0.25cm}
+  \begin{center}
+  \begin{tikzpicture}[x=1cm,y=0.78cm]
+    % staircase steps
+    \fill[teal]      (0,0) rectangle (3,1);
+    \fill[teal!75]   (2.6,1) rectangle (5.6,2);
+    \fill[terra!75]  (5.2,2) rectangle (8.2,3);
+    \fill[terra]     (7.8,3) rectangle (10.8,4);
+    \node[white,font=\scriptsize\bfseries,align=center] at (1.5,0.5) {Clean\\ inbox};
+    \node[white,font=\scriptsize\bfseries,align=center] at (4.1,1.5) {Better\\ data};
+    \node[white,font=\scriptsize\bfseries,align=center] at (6.7,2.5) {Safer\\ AI};
+    \node[white,font=\scriptsize\bfseries,align=center] at (9.3,3.5) {More you\\ can trust it};
+    \draw[-{Stealth[length=3mm]},thick,muted] (0,4.4) -- (0,0) -- (11,0);
+  \end{tikzpicture}
+  \end{center}
+  \vspace{0.4em}
+  \begin{block}{}
+    \centering\small
+    Today's clean-up isn't the whole plan --- it's the \textbf{bottom step}.
+    Each step we climb makes the next one cheaper, safer, and easier to trust.
+  \end{block}
+\end{frame}
+
+% ---- Slide: what n8n really is (the engine) -------------------------
+\begin{frame}{n8n is the engine for everything next}
+  \vspace{0.3cm}
+  \begin{block}{One tool, many jobs}
+    \small
+    The same assistant tool (n8n) that drafts email replies can quietly run
+    \textbf{dozens of other small jobs} across the business --- each one a recipe
+    that connects the tools you already use: Gmail, Shopify, Google Sheets,
+    AusPost, and your reviews app.
+  \end{block}
+  \vspace{0.7em}
+  \begin{itemize}\setlength\itemsep{0.6em}
+    \item[\textcolor{terra}{$\bullet$}] Build it \textbf{once}, it runs forever --- no extra staff, no extra logins.
+    \item[\textcolor{terra}{$\bullet$}] \textbf{Same safety rule everywhere:} a human approves anything involving money, returns, or an upset customer.
+    \item[\textcolor{terra}{$\bullet$}] We \textbf{add jobs one at a time}, only when each is proven safe.
+  \end{itemize}
+\end{frame}
+
+% ---- Slide: the automation menu -------------------------------------
+\begin{frame}{The menu: what we can automate next}
+  \vspace{0.15cm}
+  \scriptsize
+  \renewcommand{\arraystretch}{1.25}
+  \begin{tabular}{@{}p{0.9cm}p{5.5cm}p{6.2cm}@{}}
+    \textcolor{teal}{\textbf{Now}} & \textbf{Sentiment dashboard} & Turns the inbox into a simple chart: ``what are customers unhappy about this month?'' \\
+    \textcolor{teal}{\textbf{Now}} & \textbf{Auto review requests} & A polite ``how did we do?'' goes out a few days after delivery --- more reviews, zero effort. \\
+    \textcolor{teal}{\textbf{Now}} & \textbf{Daily morning report} & One email each morning: yesterday's sales, orders to pack, anything urgent. \\
+    \textcolor{terra}{\textbf{Next}} & \textbf{``Where's my parcel?'' drafts} & Reads the AusPost tracking and drafts the answer (a human still sends). \\
+    \textcolor{terra}{\textbf{Next}} & \textbf{Returns \& refund drafts} & Drafts the reply using \emph{your} written policy --- never auto-approves money. \\
+    \textcolor{terra}{\textbf{Next}} & \textbf{Product Q\&A drafts} & Answers ``what's the material / size / care?'' once product info is tidy. \\
+    \textcolor{muted}{\textbf{Later}} & \textbf{Light CRM view} & Customer $\rightarrow$ past orders $\rightarrow$ past issues, so every reply has context. \\
+  \end{tabular}
+  \vspace{0.3em}
+  \begin{center}\scriptsize\textcolor{muted}{``Next'' items unlock once a few business decisions are written down --- see the SOP slide.}\end{center}
+\end{frame}
+
+% ---- Slide: real-world examples -------------------------------------
+\begin{frame}{This isn't experimental --- it's how shops run in 2026}
+  \vspace{0.2cm}
+  \small
+  \begin{itemize}\setlength\itemsep{0.7em}
+    \item[\textcolor{terra}{$\bullet$}] Modern online-store support is shifting from bots that just \emph{explain}
+          a refund to systems that \emph{prepare and perform} the action --- with the
+          owner's policy switches \textbf{off by default}.
+    \item[\textcolor{terra}{$\bullet$}] Shops that adopt this well report real gains in \textbf{cost, reply speed,
+          and customer happiness within the first 60--90 days}.
+    \item[\textcolor{terra}{$\bullet$}] The safest setups always keep a \textbf{human approval gate} for refunds,
+          replacements, and discounts --- exactly the rule we already follow.
+    \item[\textcolor{terra}{$\bullet$}] Shopify itself ships a built-in automation tool (Flow) --- proof this is
+          mainstream, not a gamble.
+  \end{itemize}
+  \vspace{0.4em}
+  \begin{center}
+    \tiny\textcolor{muted}{Sources: pctechmag.com (2026), Retail Technology Innovation Hub (2026), techtimes.com (2026), shopify.com/flow. Examples paraphrased for plain language.}
+  \end{center}
+\end{frame}
+
+% ---- Slide: what is an SOP / what I need from you -------------------
+\begin{frame}{What I'll need from you: your ``SOPs''}
+  \vspace{0.25cm}
+  \begin{block}{What's an SOP?}
+    \centering\large
+    An SOP is just \textcolor{terra}{\textbf{your way of doing a task, written down}} --- like a recipe card.
+  \end{block}
+  \vspace{0.7em}
+  \small
+  The AI can only be as good as the rules it's given. To safely automate the
+  ``Next'' items, I need a few of your decisions written down once:
+  \begin{itemize}\setlength\itemsep{0.45em}
+    \item[\textcolor{teal}{$\bullet$}] \textbf{Returns \& refunds:} how many days, who pays postage, refund or replace first?
+    \item[\textcolor{teal}{$\bullet$}] \textbf{Sizing facts:} confirm the PJ sizes (Shopify and support currently disagree).
+    \item[\textcolor{teal}{$\bullet$}] \textbf{Damaged / swapped items:} how you record when a different item was sent.
+  \end{itemize}
+  \vspace{0.4em}
+  \pause
+  \begin{center}\small\textcolor{muted}{You talk me through it once --- I turn it into a safe, repeatable automation.}\end{center}
+\end{frame}
+
+% ---- Slide: how we'd work together ----------------------------------
+\begin{frame}{How we'd build it --- safe and in stages}
+  \vspace{0.3cm}
+  \begin{enumerate}\setlength\itemsep{0.7em}
+    \item[\textcolor{terra}{1.}] \textbf{Weeks 1--4 --- Relief.} Clean the inbox, stand up the sentiment dashboard, switch on review requests. No business decisions needed.
+    \pause
+    \item[\textcolor{terra}{2.}] \textbf{Weeks 4--8 --- Foundations.} We write down the SOPs together (returns, sizing, swaps) and tidy the top products' info.
+    \pause
+    \item[\textcolor{terra}{3.}] \textbf{Weeks 8--12 --- Guarded growth.} Switch on parcel-status and returns drafts --- still human-approved --- and deliver your first trends report.
+  \end{enumerate}
+  \vspace{0.5em}
+  \pause
+  \begin{center}\small\textcolor{muted}{Every stage stands on its own. We only move up when you're happy.}\end{center}
+\end{frame}
+
+% ---- Slide: why trust me --------------------------------------------
+\begin{frame}{Why trust me with this}
+  \vspace{0.4cm}
+  \begin{itemize}\setlength\itemsep{0.85em}
+    \item[\textcolor{terra}{$\bullet$}] \textbf{Safety-first by default.} Nothing I build sends, spends, or deletes without a human saying yes.
+    \item[\textcolor{terra}{$\bullet$}] \textbf{I already know your setup.} Gmail, Shopify, Sheets, AusPost, your reviews --- and where today's gaps are.
+    \item[\textcolor{terra}{$\bullet$}] \textbf{Small, provable steps.} Every piece shows its value before we build the next --- no big-bang risk.
+    \item[\textcolor{terra}{$\bullet$}] \textbf{It all compounds.} One partner, one plan, each piece making the next cheaper and safer.
+  \end{itemize}
+\end{frame}
+
 % ---- Slide: the ask -------------------------------------------------
 \begin{frame}{What I'm asking for}
   \vspace{0.5cm}
-  \begin{block}{The proposal}
-    Let me set up the sorting rules this week, switch them on stickers-first,
-    and show you the before/after inbox count.
+  \begin{block}{Two small yeses}
+    \small
+    \textbf{1.} Let me roll out the inbox clean-up this week (stickers-first) and
+    show you the before/after count.\\[0.4em]
+    \textbf{2.} Give me 30 minutes to walk through the roadmap and pick the first
+    ``Now'' automation to build together.
   \end{block}
-  \vspace{1em}
-  \begin{itemize}\setlength\itemsep{0.7em}
-    \item[\textcolor{terra}{$\bullet$}] \textbf{Time:} a few hours to set up. No new tools, no extra cost.
+  \vspace{0.8em}
+  \begin{itemize}\setlength\itemsep{0.55em}
+    \item[\textcolor{terra}{$\bullet$}] \textbf{Time:} the clean-up is a few hours. No new tools, no extra cost.
     \item[\textcolor{terra}{$\bullet$}] \textbf{Risk:} undo-able at every step --- nothing sent, nothing deleted.
-    \item[\textcolor{terra}{$\bullet$}] \textbf{Payoff:} a calm, customer-only inbox --- and a cheaper, safer AI.
+    \item[\textcolor{terra}{$\bullet$}] \textbf{Payoff:} a calm inbox now --- and a clear path to a business that runs its busywork itself.
   \end{itemize}
 \end{frame}
 
@@ -378,7 +528,7 @@
   \vspace{2.2cm}
   \begin{center}
     {\Huge\bfseries\textcolor{white}{Clear the clutter first.}}\\[0.6em]
-    {\large\textcolor{sand}{Then let the AI do the clever part.}}\\[2.5em]
+    {\large\textcolor{sand}{Then let's automate the busywork --- one safe step at a time.}}\\[2.5em]
     \textcolor{terra}{\rule{5em}{2.5pt}}
   \end{center}
 \end{frame}
